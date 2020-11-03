@@ -1,0 +1,39 @@
+﻿@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage<IEnumerable< Modules.OrganizationOrganization.Models.Item >>
+
+@using System.Text.RegularExpressions
+@using DotNetNuke.Web.Mvc.Helpers
+@using Modules.OrganizationOrganization.Models
+
+@{ 
+    var organizations = ViewBag.organization as List<GetOrganizationAll>;
+}
+
+<div>
+    <table class="table table-striped" id="tbEmployee">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Code</th>
+                <th>ImagePath</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in organizations)
+            {
+            <tr>
+                <td class="table-plus">@item.OrganizationId</td>
+                <td>@item.Name</td>
+                <td>@item.Code</td>
+                <td>@item.ImagePath</td>
+                <td>
+                    @*<a href="javascript:void(0);" onclick="employee.get(@item.OrganizationId)" class="dropdown-item"><i class="fas fa-quidditch fa-xs"></i></a>
+                    <a class="dropdown-item" href="javascript:void(0);" onclick="employee.delete(@employee.Id)"><i class="fa fa-trash"></i> </a>*@
+                </td>
+            </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
