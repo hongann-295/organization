@@ -1,13 +1,20 @@
-﻿@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage<IEnumerable< Modules.OrganizationOrganization.Models.Item >>
+﻿@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage<IEnumerable<Modules.OrganizationOrganization.Models.Item>>
 
 @using System.Text.RegularExpressions
 @using DotNetNuke.Web.Mvc.Helpers
 @using Modules.OrganizationOrganization.Models
 
-@{ 
+@{
     var organizations = ViewBag.organization as List<GetOrganizationAll>;
 }
 
+
+
+<div>
+    <a href="javascript:void(0);" onclick="organization.openAddOrg()" class="btn btn-success">Add Organization</a>
+    <input type="hidden" id="ModuleId" value="@Dnn.ModuleContext.ModuleId" />
+    <input type="hidden" id="TabId" value="@Dnn.ModuleContext.TabId" />
+</div>
 <div>
     <table class="table table-striped" id="tbEmployee">
         <thead>
@@ -22,18 +29,75 @@
         <tbody>
             @foreach (var item in organizations)
             {
-            <tr>
-                <td class="table-plus">@item.OrganizationId</td>
-                <td>@item.Name</td>
-                <td>@item.Code</td>
-                <td>@item.ImagePath</td>
-                <td>
-                    @*<a href="javascript:void(0);" onclick="employee.get(@item.OrganizationId)" class="dropdown-item"><i class="fas fa-quidditch fa-xs"></i></a>
-                    <a class="dropdown-item" href="javascript:void(0);" onclick="employee.delete(@employee.Id)"><i class="fa fa-trash"></i> </a>*@
-                </td>
-            </tr>
+                <tr>
+                    <td class="table-plus">@item.OrganizationId</td>
+                    <td>@item.Name</td>
+                    <td>@item.Code</td>
+                    <td><img src=@item.ImagePath class="card-img-top myImage" style="width:150px;height:150px" /></td>
+                    <td>
+                        <a href="javascript:void(0);" onclick="organization.get(@item.OrganizationId)" class="dropdown-item"><i class="fas fa-quidditch fa-xs"></i></a>
+                        <a class="dropdown-item" href="javascript:void(0);" onclick="organization.delete(@item.OrganizationId)"><i class="fa fa-trash"></i> </a>
+                    </td>
+                </tr>
             }
 
         </tbody>
     </table>
 </div>
+
+
+<div class="modal" id="addEditOrg">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div  id="desOrg">
+                <input hidden id="Id" />
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Organization</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div>
+                        <label>Name:</label>
+                        <input type="text" class="form-control" id="Name" name="FullName">
+                    </div>
+                    <div>
+                        <label>Code:</label>
+                        <input type="text" class="form-control" id="Code" name="Code" @*disabled="disabled"*@>
+                    </div>
+                    <div>
+                        <label>Image:</label>
+                        <img src="~/desktopmodules/mvc/Organization/script/image/đăng nhập.png" id="ImagePath" width="200" height="210" />
+                        <input type="file" id="FileUpload" class="custom-file" accept="image/*" onchange="organization.uploadImage(this)" />
+                        @*<input type="file" class="form-control" id="FileUpload" onchange="organization.uploadImage(this)" placeholder="Browse" />*@
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" onclick="organization.save()">Save</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="~/desktopmodules/mvc/Organization/script/bootbox.locales.min.js"></script>
+<script src="~/desktopmodules/mvc/Organization/script/bootbox.min.js"></script>
+<script src="~/desktopmodules/mvc/Organization/script/org.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />

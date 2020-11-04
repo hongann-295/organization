@@ -11,7 +11,7 @@ namespace Modules.OrganizationOrganization.Components
         public void RegisterRoutes(IMapRoute mapRouteManager)
         {
             mapRouteManager.MapRoute("Organization", "default", "{controller}/{action}",
-                new[] { " Modules.OrganizationOrganization.Controllers" });
+                new[] { "Modules.OrganizationOrganization.Controllers" });
         }
     }
 }

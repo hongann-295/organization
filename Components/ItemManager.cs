@@ -12,6 +12,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DotNetNuke.Data;
 using DotNetNuke.Framework;
 using Modules.OrganizationOrganization.Models;
@@ -27,6 +28,10 @@ namespace Modules.OrganizationOrganization.Components
         Item GetItem(int itemId, int moduleId);
         void UpdateItem(Item t);
         IEnumerable<GetOrganizationAll> GetOrganization();
+        Organization GetOrganization(int organizationId);
+        DeleteOrganization DeleteOrganizatio(int organizationId);
+        void SaveOrganization(Organization org);
+
     }
 
     class ItemManager : ServiceLocator<IItemManager, ItemManager>, IItemManager
@@ -96,6 +101,33 @@ namespace Modules.OrganizationOrganization.Components
             using (IDataContext ctx = DataContext.Instance())
             {
                 return ctx.ExecuteQuery<GetOrganizationAll>(System.Data.CommandType.StoredProcedure, String.Format("Sp_GetOrganization"));
+            }
+        }
+
+        public Organization GetOrganization(int organizationId)
+        {
+            using (IDataContext ctx = DataContext.Instance())
+            {
+                IEnumerable<Organization> x = ctx.ExecuteQuery<Organization>(System.Data.CommandType.StoredProcedure, String.Format("Sp_GetOrganizationById {0}", organizationId));
+                return x.FirstOrDefault();
+            }
+        }
+
+        public DeleteOrganization DeleteOrganizatio(int organizationId)
+        {
+            using (IDataContext ctx = DataContext.Instance())
+            {
+                IEnumerable<DeleteOrganization> y = ctx.ExecuteQuery<DeleteOrganization>(System.Data.CommandType.StoredProcedure, String.Format("Sp_DeleteOrganization {0}", organizationId));
+                return y.FirstOrDefault();
+            }
+        }
+
+        public void SaveOrganization(Organization org)
+        {
+            using (IDataContext ctx = DataContext.Instance())
+            {
+                ctx.ExecuteQuery<Organization>(System.Data.CommandType.StoredProcedure, String.Format("Sp_SaveOrganization"));
+
             }
         }
     }

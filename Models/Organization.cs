@@ -10,6 +10,6 @@ namespace Modules.OrganizationOrganization.Models
         public int OrganizationId { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
-        public string ImagePath { get; set; }
+        public byte[] ImagePath { get; set; }
     }
 }
