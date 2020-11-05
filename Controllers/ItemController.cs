@@ -89,28 +89,26 @@ namespace Modules.OrganizationOrganization.Controllers
         }
 
         [HttpPost]
-        public JsonResult Save(Organization org, HttpPostedFileBase file)
+        public ActionResult SaveOrganization(Organization objOrg/*HttpPostedFileBase file*/)
         {
+            var file = Request.Files("HelpSectionImages");
             if (file != null && file.ContentLength > 0)
             {
                 // extract only the fieldname
                 var fileName = Path.GetFileName(file.FileName);
                 // store the file inside ~/App_Data/uploads folder
-                var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), fileName);
+                var path = Path.Combine(Server.MapPath("~/uploads"), fileName);
                 file.SaveAs(path);
             }
-            ItemManager.Instance.SaveOrganization(org);
-            org.ImagePath = new byte[file.ContentLength];
-            file.InputStream.Read(org.ImagePath, 0, file.ContentLength);
-            Organization orgs = new Organization()
-            {
-                OrganizationId = org.OrganizationId,
-                Name = org.Name,
-                Code = org.Code,
-                ImagePath = org.ImagePath
-            };
-            return Json(orgs);
+            ItemManager.Instance.SaveOrganization(objOrg);
+            //org.ImagePath = new byte[file.ContentLength];
+            //file.InputStream.Read(org.ImagePath, 0, file.ContentLength);
+            Organization orgs = new Organization();
+            orgs.Name = objOrg.Name;
+            orgs.Code = objOrg.Code;            
+            return Json(new { data = JsonConvert.SerializeObject(orgs, Formatting.Indented) }, JsonRequestBehavior.AllowGet);
         }
+
 
         //[HttpPost]
         //public JsonResult UploadFiles()

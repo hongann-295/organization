@@ -57,17 +57,24 @@ organization.save = function () {
     org.Name = $('#Name').val();
     org.Id = parseInt($('#Id').val());
     org.Code = $('#Code').val();
-    org.ImagePath = $('#ImagePath').attr('src');
+    //org.ImagePath = $('#ImagePath').attr('src');
     console.log(org.Id);
     console.log(org.Name);
     console.log(org.Code);
     console.log(org.ImagePath);
+    var datas = new FormData();
+    var files = $("#ImagePath").get(0).files;
+    if (files.length > 0) {
+        datas.append("HelpSectionImages", files[0]);
+    }
+    console.log(datas);
     $.ajax({
-        url: siteRoot + 'DesktopModules/MVC/Organization/Item/Save',
+        url: siteRoot + 'DesktopModules/MVC/Organization/Item/SaveOrganization',
         method: "POST",
         dataType: "json",
         contentType: "application/json",
-        data: JSON.stringify(org),
+        data: { objOrg: JSON.stringify(org) },
+        //data: { OrganizationId: org.Id, Name: org.Name, Code: org.Code, ImagePath: org.ImagePath },
         headers: {
             "ModuleId": ModuleId,
             "TabId": TabId,
@@ -79,6 +86,9 @@ organization.save = function () {
         }
     });
 }
+
+
+
 
 
 organization.get = function (id) {
