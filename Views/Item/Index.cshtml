@@ -46,46 +46,50 @@
 </div>
 
 
-<div class="modal" id="addEditOrg">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div  id="desOrg">
-                <input hidden id="Id" />
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">Organization</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
+<from>
+    <div class="modal" id="addEditOrg">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div id="desOrg">
+                    <input hidden id="Id" />
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Organization</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
 
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <div>
-                        <label>Name:</label>
-                        <input type="text" class="form-control" id="Name" name="FullName">
-                    </div>
-                    <div>
-                        <label>Code:</label>
-                        <input type="text" class="form-control" id="Code" name="Code" @*disabled="disabled"*@>
-                    </div>
-                    <div>
-                        <label>Image:</label>
-                        <img src="~/desktopmodules/mvc/Organization/script/image/đăng nhập.png" id="ImagePath" width="200" height="210" />
-                        <input type="file" id="FileUpload" class="custom-file" accept="image/*" onchange="organization.uploadImage(this)" />
-                        @*<input type="file" class="form-control" id="FileUpload" onchange="organization.uploadImage(this)" placeholder="Browse" />*@
-                    </div>
-                </div>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div>
+                            <label>Name:</label>
+                            <input type="text" class="form-control" id="Name" name="FullName">
+                        </div>
+                        <div>
+                            <label>Code:</label>
+                            <input type="text" class="form-control" id="Code" name="Code" @*disabled="disabled"*@>
+                        </div>
+                        <div>
+                            <label>Image:</label>
+                            <img src="~/desktopmodules/mvc/Organization/script/image/đăng nhập.png" id="ImagePath" width="200" height="210" />
+                            <input type="file" id="FileUpload" class="custom-file" accept="image/*" onchange="organization.uploadImage(this)" />
+                            @*<input type="file" class="form-control" id="FileUpload" onchange="organization.uploadImage(this)" placeholder="Browse" />*@
+                        </div>
+                        @*<div>
+                                <input type="file" id="fileToUpload" class="form-control" /> <br />
 
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success" onclick="organization.save()">Save</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>*@
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" onclick="organization.save()">Save</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-
+</from>
 
 
 <!-- Latest compiled and minified CSS -->
@@ -96,7 +100,7 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script src="~/desktopmodules/mvc/Organization/script/bootbox.locales.min.js"></script>
+@*<script src="~/desktopmodules/mvc/Organization/script/bootbox.locales.min.js"></script>*@
 <script src="~/desktopmodules/mvc/Organization/script/bootbox.min.js"></script>
 <script src="~/desktopmodules/mvc/Organization/script/org.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

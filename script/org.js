@@ -50,44 +50,126 @@ organization.uploadImage = function (input) {
 //});
 
 
-organization.save = function () {
+//organization.save = function () {
+//    var rvtoken = $("input[name='__RequestVerificationToken']").val();
+//    var siteRoot = dnn.getVar("sf_siteRoot", "/");
+//    var org = {};
+//    org.Name = $('#Name').val();
+//    org.Id = parseInt($('#Id').val());
+//    org.Code = $('#Code').val();
+//    //org.ImagePath = $('#ImagePath').attr('src');
+//    console.log(org.Id);
+//    console.log(org.Name);
+//    console.log(org.Code);
+//    console.log(org.ImagePath);
+//    var datas = new FormData();
+//    var files = $("#ImagePath").get(0).files;
+//    if (files.length > 0) {
+//        datas.append("HelpSectionImages", files[0]);
+//    }
+//    console.log(datas);
+//    $.ajax({
+//        url: siteRoot + 'DesktopModules/MVC/Organization/Item/SaveOrganization',
+//        method: "POST",
+//        dataType: "json",
+//        contentType: "application/json",
+//        data: { objOrg: JSON.stringify(org) },
+//        //data: { OrganizationId: org.Id, Name: org.Name, Code: org.Code, ImagePath: org.ImagePath },
+//        headers: {
+//            "ModuleId": ModuleId,
+//            "TabId": TabId,
+//            "RequestVerificationToken": rvtoken
+//        },
+//        success: function (data) {
+//            $('#addEditOrg').modal('hide');
+//            //bootbox.alert(data.data.message);
+//        }
+//    });
+//}
+
+
+
+//organization.save = function () {
+//    var rvtoken = $("input[name='__RequestVerificationToken']").val();
+//    var siteRoot = dnn.getVar("sf_siteRoot", "/");
+//    if (window.FormData == undefined) {
+//        alert("Error: FormData is undefined");
+//    }
+//    else {
+//        var fileUpload = $("#fileToUpload").get(0);
+//        var files = fileUpload.files;
+
+//        var fileData = new FormData();
+//        fileData.append(files[0].name, files[0]);
+//        console.log(fileData);
+//        $.ajax({
+//            url: siteRoot + 'DesktopModules/MVC/Organization/Item/UploadFile',
+//            method: "POST",
+//            dataType: "json",
+//            contentType: "application/json",
+//            processData: false,
+//            data: fileData,
+//            headers: {
+//                "ModuleId": ModuleId,
+//                "TabId": TabId,
+//                "RequestVerificationToken": rvtoken
+//            },
+//            success: function (response) {
+//                $('#addEditOrg').modal('hide');
+//                alert(response);
+
+                
+//            }
+//        });
+//    }
+
+//}
+
+
+organization.save = function (id) {
     var rvtoken = $("input[name='__RequestVerificationToken']").val();
+    var ModuleId = $('#ModuleId').val();
+    var TabId = $('#TabId').val();
     var siteRoot = dnn.getVar("sf_siteRoot", "/");
-    var org = {};
-    org.Name = $('#Name').val();
-    org.Id = parseInt($('#Id').val());
-    org.Code = $('#Code').val();
-    //org.ImagePath = $('#ImagePath').attr('src');
-    console.log(org.Id);
-    console.log(org.Name);
-    console.log(org.Code);
-    console.log(org.ImagePath);
     var datas = new FormData();
-    var files = $("#ImagePath").get(0).files;
+    var files = $("#FileUpload").get(0).files;
     if (files.length > 0) {
         datas.append("HelpSectionImages", files[0]);
     }
-    console.log(datas);
+    datas.append("objOrg", $('#IdOrg').val());
+    datas.append("code", $('#Code').val());
+    datas.append("name", $('#Name').val());
+    datas.append("imagePath", $('#ImagePath').val());
+    //datas.append("imgPath", $('#ImagePath').attr('src'));
+    console.log($('#IdOrg').val());
+    console.log($('#Code').val());
+    console.log($('#Name').val());
+    console.log(files[0]);
+    //alert($('#IdOrg').val());
     $.ajax({
         url: siteRoot + 'DesktopModules/MVC/Organization/Item/SaveOrganization',
-        method: "POST",
-        dataType: "json",
-        contentType: "application/json",
-        data: { objOrg: JSON.stringify(org) },
-        //data: { OrganizationId: org.Id, Name: org.Name, Code: org.Code, ImagePath: org.ImagePath },
+        type: 'post',
+        //datatype: 'json',
+        contentType: false,
+        processData: false,
+        async: true,
+        data: datas,
         headers: {
             "ModuleId": ModuleId,
             "TabId": TabId,
             "RequestVerificationToken": rvtoken
         },
         success: function (data) {
-            $('#addEditOrg').modal('hide');
-            //bootbox.alert(data.data.message);
+            //Page.form.reset();
+           // $("#divDonVi").load(" #divDonVi > *");
+            //$('#divDonVi').load(document.URL);
+            // $("#divDonVi").load("#divDonVi");
+            alertify.success('Cập nhật thành công!');
+            //bootbox.alert('Cập nhật thành công!');
         }
     });
+
 }
-
-
 
 
 

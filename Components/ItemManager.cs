@@ -30,6 +30,7 @@ namespace Modules.OrganizationOrganization.Components
         IEnumerable<GetOrganizationAll> GetOrganization();
         Organization GetOrganization(int organizationId);
         DeleteOrganization DeleteOrganizatio(int organizationId);
+        //void SaveOrganization(int orgId, string name, string code, string imagePath);
         void SaveOrganization(Organization org);
 
     }
@@ -126,9 +127,18 @@ namespace Modules.OrganizationOrganization.Components
         {
             using (IDataContext ctx = DataContext.Instance())
             {
-                ctx.ExecuteQuery<Organization>(System.Data.CommandType.StoredProcedure, String.Format("Sp_SaveOrganization"));
+                ctx.ExecuteQuery<Organization>(System.Data.CommandType.StoredProcedure, String.Format("Sp_SaveOrganization  {0}{1}{2}{3}", org.OrganizationId, org.Name, org.Code, org.ImagePath));
 
             }
         }
+
+        //public void SaveOrganization(int orgId, string name, string code, string imagePath)
+        //{
+        //    using (IDataContext ctx = DataContext.Instance())
+        //    {
+        //        ctx.ExecuteQuery<Organization>(System.Data.CommandType.StoredProcedure, String.Format("Sp_SaveOrganization {0}{1}{2}{3}", orgId, name, code, imagePath));
+
+        //    }
+        //}
     }
 }

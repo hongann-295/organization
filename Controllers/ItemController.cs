@@ -89,26 +89,39 @@ namespace Modules.OrganizationOrganization.Controllers
         }
 
         [HttpPost]
-        public ActionResult SaveOrganization(Organization objOrg/*HttpPostedFileBase file*/)
+        public ActionResult SaveOrganization(Organization organization)
         {
-            var file = Request.Files("HelpSectionImages");
+            ItemManager.Instance.SaveOrganization(organization);
+            var file = Request.Files["HelpSectionImages"];
             if (file != null && file.ContentLength > 0)
             {
                 // extract only the fieldname
                 var fileName = Path.GetFileName(file.FileName);
                 // store the file inside ~/App_Data/uploads folder
-                var path = Path.Combine(Server.MapPath("~/uploads"), fileName);
-                file.SaveAs(path);
+                var paths = Path.Combine(Server.MapPath("~/App-data/uploads"), fileName);
+                //try
+                //{
+                //    if (!Directory.Exists(paths))
+                //    {
+                //        DirectoryInfo di = Directory.CreateDirectory(paths);
+                //    }
+                //}catch(Exception e)
+                //{
+                //    throw e;
+                //}
+               
+                file.SaveAs(paths);
+                organization.ImagePath = paths;
             }
-            ItemManager.Instance.SaveOrganization(objOrg);
-            //org.ImagePath = new byte[file.ContentLength];
-            //file.InputStream.Read(org.ImagePath, 0, file.ContentLength);
+            
             Organization orgs = new Organization();
-            orgs.Name = objOrg.Name;
-            orgs.Code = objOrg.Code;            
+            orgs.Name = organization.Name;
+            orgs.Code = organization.Code;
+            orgs.ImagePath = organization.ImagePath;
             return Json(new { data = JsonConvert.SerializeObject(orgs, Formatting.Indented) }, JsonRequestBehavior.AllowGet);
         }
 
+        
 
         //[HttpPost]
         //public JsonResult UploadFiles()
