@@ -114,6 +114,8 @@ namespace Modules.OrganizationOrganization.Components
             }
         }
 
+
+
         public DeleteOrganization DeleteOrganizatio(int organizationId)
         {
             using (IDataContext ctx = DataContext.Instance())
@@ -127,8 +129,9 @@ namespace Modules.OrganizationOrganization.Components
         {
             using (IDataContext ctx = DataContext.Instance())
             {
-                ctx.ExecuteQuery<Organization>(System.Data.CommandType.StoredProcedure, String.Format("Sp_SaveOrganization  {0}{1}{2}{3}", org.OrganizationId, org.Name, org.Code, org.ImagePath));
-
+    
+              SaveResult str= ctx.ExecuteSingleOrDefault<SaveResult>(System.Data.CommandType.StoredProcedure,string.Format("Sp_SaveOrganization  {0},{1},{2},{3}", org.OrganizationId, org.Name, org.Code, "Web/DNN_MVC/App_Data/uploads/image_cv.j"));
+                
             }
         }
 

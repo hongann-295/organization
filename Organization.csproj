@@ -117,6 +117,7 @@
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Models\Organization.cs" />
     <Compile Include="Models\SaveOrganization.cs" />
+    <Compile Include="Models\SaveResult.cs" />
     <Compile Include="Models\Settings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

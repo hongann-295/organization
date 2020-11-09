@@ -91,29 +91,31 @@ namespace Modules.OrganizationOrganization.Controllers
         [HttpPost]
         public ActionResult SaveOrganization(Organization organization)
         {
-            ItemManager.Instance.SaveOrganization(organization);
+           
             var file = Request.Files["HelpSectionImages"];
             if (file != null && file.ContentLength > 0)
             {
                 // extract only the fieldname
                 var fileName = Path.GetFileName(file.FileName);
                 // store the file inside ~/App_Data/uploads folder
-                var paths = Path.Combine(Server.MapPath("~/App-data/uploads"), fileName);
-                //try
-                //{
-                //    if (!Directory.Exists(paths))
-                //    {
-                //        DirectoryInfo di = Directory.CreateDirectory(paths);
-                //    }
-                //}catch(Exception e)
-                //{
-                //    throw e;
-                //}
-               
+                var paths = Path.Combine(Server.MapPath("~/App_Data/uploads"), fileName);
+            /*    try
+                {
+                    if (!Directory.Exists(paths))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(paths);
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }*/
+
                 file.SaveAs(paths);
+                paths =paths.ToString().Replace("\\", "/");
                 organization.ImagePath = paths;
             }
-            
+            ItemManager.Instance.SaveOrganization(organization);
             Organization orgs = new Organization();
             orgs.Name = organization.Name;
             orgs.Code = organization.Code;

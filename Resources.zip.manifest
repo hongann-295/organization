@@ -17,8 +17,16 @@
       <name>Index.cshtml</name>
     </file>
     <file>
-      <path>Views/</path>
-      <name>_ViewStart.cshtml</name>
+      <path>script/</path>
+      <name>bootbox.locales.min.js</name>
+    </file>
+    <file>
+      <path>script/</path>
+      <name>bootbox.min.js</name>
+    </file>
+    <file>
+      <path>script/</path>
+      <name>org.js</name>
     </file>
     <file>
       <path>Documentation/</path>
@@ -27,6 +35,10 @@
     <file>
       <path>Documentation/</path>
       <name>Documentation.html</name>
+    </file>
+    <file>
+      <path>Views/</path>
+      <name>_ViewStart.cshtml</name>
     </file>
     <file>
       <path>App_LocalResources/</path>

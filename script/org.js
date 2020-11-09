@@ -139,7 +139,7 @@ organization.save = function (id) {
     datas.append("objOrg", $('#IdOrg').val());
     datas.append("code", $('#Code').val());
     datas.append("name", $('#Name').val());
-    datas.append("imagePath", $('#ImagePath').val());
+    datas.append("imagePath", $('#FileUpload').val());
     //datas.append("imgPath", $('#ImagePath').attr('src'));
     console.log($('#IdOrg').val());
     console.log($('#Code').val());
